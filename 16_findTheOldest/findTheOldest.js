@@ -1,8 +1,14 @@
 const findTheOldest = function(people) {
-    return people.reduce((max, actual) => {
-        const maxAge = max.yearOfDeath - max.yearOfBirth;
-        const actualAge = actual.yearOfDeath - actual.yearOfBirth;
-        return actualAge > maxAge ? actual : max;
+    return people.reduce((oldest, actual) => {
+        const currentYear = new Date().getFullYear();
+        
+        const oldestDeath = oldest.yearOfDeath ?? currentYear;
+        const actualDeath = actual.yearOfDeath ?? currentYear;
+
+        const oldestAge = oldestDeath - oldest.yearOfBirth;
+        const actualAge = actualDeath - actual.yearOfBirth;
+
+        return actualAge > oldestAge ? actual : oldest;
     })
 };
 
